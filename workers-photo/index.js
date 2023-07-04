@@ -2,9 +2,9 @@ const { Worker, isMainThread, parentPort, workerData } = require('node:worker_th
 const path = require('path');
 
 const images = [
-  'https://q-xx.bstatic.com/images/hotel/max500/428/42837182.jpg',
+  'https://aff.bstatic.com/images/hotel/max500/428/42837405.jpg',
   'https://q-xx.bstatic.com/images/hotel/max500/428/42837284.jpg',
-  'https://q-xx.bstatic.com/images/hotel/max500/478/47893112.jpg',
+  'https://aff.bstatic.com/images/hotel/max500/428/42837530.jpg',
 ];
 
 const worker1 = new Worker(path.join(__dirname, 'workerOnce.js'), { workerData: { images } });

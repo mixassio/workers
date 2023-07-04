@@ -10,7 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "got": "^13.0.0",
+    "got": "=11.8.5",
+    "uuid": "^9.0.0",
     "sharp": "^0.32.1"
   }
 }
