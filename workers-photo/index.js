@@ -4,6 +4,7 @@ const path = require('path');
 const images = [
   'https://aff.bstatic.com/images/hotel/max500/428/42837405.jpg',
   'https://q-xx.bstatic.com/images/hotel/max500/428/42837284.jpg',
+  'https://q-xx.bstatic.com/images/hotel/max500/428/42837284.jpg',
   'https://aff.bstatic.com/images/hotel/max500/428/42837530.jpg',
 ];
 
@@ -20,18 +21,18 @@ worker1.on('exit', (code) => {
 });
 
 // как его запускать в веб приложении и как к нему обращаться из других точек приложения
-const worker2 = new Worker(path.join(__dirname, 'workerWaiter.js'));
+// const worker2 = new Worker(path.join(__dirname, 'workerWaiter.js'));
 
-worker2.on('message', (data) => {
-  console.log('Получено от воркера2:', data);
-});
+// worker2.on('message', (data) => {
+//   console.log('Получено от воркера2:', data);
+// });
 
-worker2.on('exit', (code) => {
-  console.log('Worker2 stopped with exit code', code);
-});
+// worker2.on('exit', (code) => {
+//   console.log('Worker2 stopped with exit code', code);
+// });
 
-worker2.postMessage({ images });
+// worker2.postMessage({ images });
 
-worker2.postMessage('images');
+// worker2.postMessage('images');
 
-worker2.postMessage('terminate');
+// worker2.postMessage('terminate');

@@ -1,5 +1,5 @@
-const { parentPort } = require('node:worker_threads');
-let counter=0;
+const { parentPort, workerData } = require('node:worker_threads');
+
 parentPort.on('message', (data) => {
   console.log('получено в воркер2', data);
   con

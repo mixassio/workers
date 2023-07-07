@@ -9,20 +9,23 @@ const fs = require('fs');
 const { v4: uuid_v4 } = require('uuid');
 
 console.log('получено в воркер1', workerData);
-
+let counterCurrent = workerData.images.length;
 async function main() {
-  const promises = workerData.images.map((url) => {
+  workerData.images.forEach((url) => {
     const tmp_file = path.join(`hash_${uuid_v4()}`);
-    return pipeline(got.stream(url), fs.createWriteStream(tmp_file))
-      .then(() => sharp(tmp_file)
-          .rotate()
-          .resize(320, 240)
-          .toBuffer()
-          .then( data => parentPort.postMessage(data))
-          .catch( err => {}))
-  });
-  const result = await Promise.all(promises);
-  parentPort.postMessage(result);
+    return got.stream(url)
+      .pipe(sharp()
+        .rotate()
+        .resize(320, 240)
+        .png())
+      .pipe(fs.createWriteStream(tmp_file))
+      .on('finish', () => {
+        counterCurrent --;
+        parentPort.postMessage(counterCurrent);
+      })
+
+  })
+  parentPort.postMessage('Done');
 };
 
 main();
