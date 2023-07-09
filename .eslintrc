@@ -1,0 +1,18 @@
+{
+  "rules": {
+      "semi": ["error", "always"],
+      "quotes": ["error", "double"],
+      "prettier/prettier": [
+        "error",
+        {
+          "singleQuote": true,
+          "useTabs": false,
+          "semi": true,
+          "trailingComma": "all",
+          "bracketSpacing": true,
+          "printWidth": 100,
+          "endOfLine": "auto"
+        }
+      ]
+  }
+}

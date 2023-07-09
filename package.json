@@ -10,8 +10,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "fastify": "^4.19.2",
     "got": "=11.8.5",
-    "uuid": "^9.0.0",
-    "sharp": "^0.32.1"
+    "sharp": "^0.32.1",
+    "uuid": "^9.0.0"
   }
 }
