@@ -4,19 +4,21 @@ const { workerId } = workerData;
 console.log(`запущен воркер ${workerId}`);
 let currentJobs = 0;
 
-parentPort.on('message', (data) => {
-	console.log(`получено в воркер ${workerId}`, data);
-	if (data === 'terminate') {
+parentPort.on('message', ({ typeMessage, data }) => {
+	console.log(`получено в воркер ${workerId}`, { typeMessage, data });
+	if (typeMessage === 'terminate') {
 		parentPort.close();
 		return;
 	}
-	const { chunkData, jobId } = data;
-	currentJobs += chunkData.length;
-	for (const chunk of chunkData) {
-		const result = `${chunk} +`;
-		currentJobs--;
-		parentPort.postMessage({ result, status: 'progress', workerId, jobId });
+	if (typeMessage === 'imageJob') {
+		const { urls, jobId } = data;
+		currentJobs += urls.length;
+		for (const url of urls) {
+			const result = `${url} +`;
+			currentJobs--;
+			parentPort.postMessage({ result, status: 'progress', workerId, jobId });
+		}
+	
+		parentPort.postMessage({ result: null, status: 'finish', workerId, jobId });
 	}
-
-	parentPort.postMessage({ result: null, status: 'finish', workerId, jobId });
 });
